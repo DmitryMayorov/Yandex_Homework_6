@@ -6,10 +6,13 @@ using UnityEngine.UI;
 
 public class ModelVariants : MonoBehaviour
 {
-
-    [SerializeField] private GameObject[] _models;
     public static GameObject _currenSelected;
+
+    [SerializeField] private GameObject[] _models; 
+
     [SerializeField] private TMP_Dropdown _dropdown;
+
+    [SerializeField] MaterialManager _materialManager;
 
     private void Start()
     {
@@ -26,13 +29,14 @@ public class ModelVariants : MonoBehaviour
 
         _dropdown.onValueChanged.AddListener(Select);
 
+        _materialManager.SetMaterial(_materialManager._material);
     }
 
-    public void Select(int index) {
+    public void Select(int index)
+    {
         _currenSelected.SetActive(false);
         _currenSelected = _models[index];
         _currenSelected.SetActive(true);
+        _materialManager.SetMaterial(_materialManager._material);
     }
-
-
 }
